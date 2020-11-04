@@ -23,9 +23,10 @@ namespace HotelReservationTesting
             hotelsManager.AddHotel(new Hotel("Lakewood", 110));
             hotelsManager.AddHotel(new Hotel("Bridgewood", 150));
             hotelsManager.AddHotel(new Hotel("Ridgewood", 220));
-            string[] dates = "10Dec2020,11Dec2020".Split(",");
+            string[] dates = "01Jan2019,11Dec2020".Split(",");
             Hotel cheapestHotel = hotelsManager.FindCheapestHotel(dates);
             Assert.AreEqual("Lakewood", cheapestHotel.hotelName);
+            Assert.AreEqual(220, cheapestHotel.regularRates*dates.Length);
         }
     }
 }

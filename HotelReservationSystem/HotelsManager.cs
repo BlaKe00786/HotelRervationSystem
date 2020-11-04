@@ -17,13 +17,24 @@ namespace HotelReservationSystem
         }
         public Hotel FindCheapestHotel(string[] dates)
         {
-            DateTime[] validatedDates =ValidateDates(dates);
+            DateTime[] validatedDates =getDates(dates);
             hotelsList.Sort((hotel1, hotel2) => hotel1.regularRates.CompareTo(hotel2.regularRates));
             return hotelsList[0];
         }
-        public DateTime[] ValidateDates(string[] dates)
+        public DateTime[] getDates(string[] dates)
         {
-
+            DateTime[] datesValidated = new DateTime[dates.Length];
+            for (int i = 0; i < dates.Length; i++)
+            {
+                DateTime date = ConvertToDate(dates[i]);
+                datesValidated[i] = date;
+            }
+            return datesValidated;
+        }
+        public DateTime ConvertToDate(string enteredDate)
+        {
+                DateTime date = DateTime.Parse(enteredDate);
+                return date;
         }
     }
 }
