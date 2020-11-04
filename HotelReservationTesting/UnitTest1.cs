@@ -6,15 +6,26 @@ namespace HotelReservationTesting
     public class UnitTest1
     {
         [TestMethod]
-        public void TestMethod1()
+        public void GivenHotelCheckNameAndRate()
         {
             string hotelName = "Bridgewood";
             int regularRates = 150;
             HotelsManager hotelsManager = new HotelsManager();
             Hotel hotel = new Hotel(hotelName, regularRates);
             hotelsManager.AddHotel(hotel);
-            Assert.AreEqual("Bridgewood", hotelsManager.hotelsList[0].hotelName);
-
+            Assert.AreEqual(hotelName, hotelsManager.hotelsList[0].hotelName);
+            Assert.AreEqual(regularRates, hotelsManager.hotelsList[0].regularRates);
+        }
+        [TestMethod]
+        public void GivenDatesReturnsCheapestHotel()
+        {
+            HotelsManager hotelsManager = new HotelsManager();
+            hotelsManager.AddHotel(new Hotel("Lakewood", 110));
+            hotelsManager.AddHotel(new Hotel("Bridgewood", 150));
+            hotelsManager.AddHotel(new Hotel("Ridgewood", 220));
+            string[] dates = "10Dec2020,11Dec2020".Split(",");
+            Hotel cheapestHotel = hotelsManager.FindCheapestHotel(dates);
+            Assert.AreEqual("Lakewood", cheapestHotel.hotelName);
         }
     }
 }
