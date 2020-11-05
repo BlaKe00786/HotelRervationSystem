@@ -17,8 +17,8 @@ namespace HotelReservationSystem
             {
                 date[index] = DateTime.Parse(dates[index]);
             }
-            Hotel cheapestHotel = hotelsManager.FindCheapestHotel(date);
-            Console.WriteLine("Cheapest Hotel for given dates: "+cheapestHotel.hotelName);
+            Hotel highestRatedhotel = hotelsManager.highestRatedHotel(date);
+            Console.WriteLine("Cheapest Hotel for given dates: "+ highestRatedhotel.hotelName);
         }
     }
 }

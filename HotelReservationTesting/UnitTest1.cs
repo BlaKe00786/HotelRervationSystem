@@ -55,7 +55,7 @@ namespace HotelReservationTesting
                 date[index] = DateTime.Parse(dates[index]);
             }
             Hotel cheapestHotel = hotelsManager.FindCheapestHotel(date);
-            Assert.AreEqual("Lakewood", cheapestHotel.hotelName);
+            Assert.AreEqual("Bridgewood", cheapestHotel.hotelName);
         }
         [TestMethod]
         public void GivenRatingsReturnRatings()
@@ -66,6 +66,22 @@ namespace HotelReservationTesting
             hotelsManager.AddHotel(new Hotel("Bridgewood", "Regular", 150, 50, 4));
             hotelsManager.AddHotel(new Hotel("Ridgewood", "Regular", 220, 150, 5));
             Assert.AreEqual(expectedRatings, hotelsManager.hotelsList[0].hotelRating);
+        }
+        [TestMethod]
+        public void GivenDatesReturnBestRatedHotel()
+        {
+            HotelsManager hotelsManager = new HotelsManager();
+            int expectedRatings = 5;
+            hotelsManager.AddHotel(new Hotel("Lakewood", "Regular", 110, 90, 3));
+            hotelsManager.AddHotel(new Hotel("Bridgewood", "Regular", 150, 50, 4));
+            hotelsManager.AddHotel(new Hotel("Ridgewood", "Regular", 220, 150, 5));
+            string[] dates = "11Sep2020,12Sep2020".Split(",");
+            DateTime[] date = new DateTime[dates.Length];
+            for (int index = 0; index < date.Length; index++)
+            {
+                date[index] = DateTime.Parse(dates[index]);
+            }
+            Assert.AreEqual(expectedRatings, hotelsManager.highestRatedHotel(date).hotelRating);
         }
     }
 }
