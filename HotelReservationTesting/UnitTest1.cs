@@ -9,24 +9,25 @@ namespace HotelReservationTesting
         public void GivenHotelCheckNameAndRate()
         {
             string hotelName = "Bridgewood";
-            int regularRates = 150;
+            int weekdayRates = 150;
+            int weekendRates = 50;
             HotelsManager hotelsManager = new HotelsManager();
-            Hotel hotel = new Hotel(hotelName, regularRates);
+            Hotel hotel = new Hotel(hotelName,"Regular", weekdayRates,weekendRates);
             hotelsManager.AddHotel(hotel);
             Assert.AreEqual(hotelName, hotelsManager.hotelsList[0].hotelName);
-            Assert.AreEqual(regularRates, hotelsManager.hotelsList[0].regularRates);
+            Assert.AreEqual(weekdayRates, hotelsManager.hotelsList[0].weekdayRates);
         }
         [TestMethod]
         public void GivenDatesReturnsCheapestHotel()
         {
             HotelsManager hotelsManager = new HotelsManager();
-            hotelsManager.AddHotel(new Hotel("Lakewood", 110));
-            hotelsManager.AddHotel(new Hotel("Bridgewood", 150));
-            hotelsManager.AddHotel(new Hotel("Ridgewood", 220));
-            string[] dates = "01Jan2019,11Dec2020".Split(",");
+            hotelsManager.AddHotel(new Hotel("Lakewood", "Regular", 110, 90));
+            hotelsManager.AddHotel(new Hotel("Bridgewood", "Regular", 150, 50));
+            hotelsManager.AddHotel(new Hotel("Ridgewood", "Regular", 220, 150));
+            string[] dates = "10Sep2020,11Sep2020".Split(",");
             Hotel cheapestHotel = hotelsManager.FindCheapestHotel(dates);
             Assert.AreEqual("Lakewood", cheapestHotel.hotelName);
-            Assert.AreEqual(220, cheapestHotel.regularRates*dates.Length);
+            Assert.AreEqual(220, cheapestHotel.weekdayRates*dates.Length);
         }
     }
 }
