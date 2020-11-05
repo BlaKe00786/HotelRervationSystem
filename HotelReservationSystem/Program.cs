@@ -8,9 +8,9 @@ namespace HotelReservationSystem
         {
             Console.WriteLine("Welcome To Hotel Reservation System.");
             HotelsManager hotelsManager = new HotelsManager();
-            hotelsManager.AddHotel(new Hotel("Lakewood","Regular", 110,90));
-            hotelsManager.AddHotel(new Hotel("Bridgewood","Regular", 150,50));
-            hotelsManager.AddHotel(new Hotel("Ridgewood", "Regular", 220,150));
+            hotelsManager.AddHotel(new Hotel("Lakewood","Regular", 110,90,3));
+            hotelsManager.AddHotel(new Hotel("Bridgewood","Regular", 150,50,4));
+            hotelsManager.AddHotel(new Hotel("Ridgewood", "Regular", 220,150,5));
             string[] dates = "11Sep2020,12Sep2020".Split(",");
             DateTime[] date = new DateTime[dates.Length];
             for (int index = 0; index < date.Length;index++)
