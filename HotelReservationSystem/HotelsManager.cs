@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace HotelReservationSystem
@@ -27,7 +28,7 @@ namespace HotelReservationSystem
             int weekendCount = 0;
             int weekdayCount = 0;
             int minimumRate = 99999;
-            Hotel cheapestHotel = null;
+            List<Hotel> cheapestHotel = new List<Hotel>();
             foreach (var date in dates)
             {
                 if (date.DayOfWeek == DayOfWeek.Saturday || date.DayOfWeek == DayOfWeek.Sunday)
@@ -42,14 +43,16 @@ namespace HotelReservationSystem
             foreach (var hotel in hotelsList)
             {
                 totalPrice = hotel.weekdayRates * weekdayCount + hotel.weekendRates * weekendCount;
-                if (totalPrice < minimumRate)
+                if (totalPrice <= minimumRate)
                 {
                     minimumRate = totalPrice;
-                    cheapestHotel = hotel;
+                    cheapestHotel.Add(hotel);
                 }
             }
             Console.WriteLine("Total Rate: " + minimumRate);
-            return cheapestHotel;
+            List<Hotel> sortedCheapestHotelsAsPerRating = cheapestHotel.OrderByDescending(x => x.hotelRating).ToList();
+            Console.WriteLine("Rating: " + sortedCheapestHotelsAsPerRating[0].hotelRating);
+            return sortedCheapestHotelsAsPerRating[0];
         }
         public DateTime[] getDates(string[] dates)
         {
