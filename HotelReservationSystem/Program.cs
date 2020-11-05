@@ -6,15 +6,19 @@ namespace HotelReservationSystem
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Welcome To Hotel Rservation System.");
+            Console.WriteLine("Welcome To Hotel Reservation System.");
             HotelsManager hotelsManager = new HotelsManager();
             hotelsManager.AddHotel(new Hotel("Lakewood","Regular", 110,90));
             hotelsManager.AddHotel(new Hotel("Bridgewood","Regular", 150,50));
             hotelsManager.AddHotel(new Hotel("Ridgewood", "Regular", 220,150));
-            string[] dates = "10Sep2020,11Sep2020".Split(",");
-            Hotel cheapestHotel = hotelsManager.FindCheapestHotel(dates);
+            string[] dates = "11Sep2020,12Sep2020".Split(",");
+            DateTime[] date = new DateTime[dates.Length];
+            for (int index = 0; index < date.Length;index++)
+            {
+                date[index] = DateTime.Parse(dates[index]);
+            }
+            Hotel cheapestHotel = hotelsManager.FindCheapestHotel(date);
             Console.WriteLine("Cheapest Hotel for given dates: "+cheapestHotel.hotelName);
-            Console.WriteLine("Total Rate: "+cheapestHotel.weekdayRates * dates.Length);
         }
     }
 }

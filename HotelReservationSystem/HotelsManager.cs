@@ -21,6 +21,36 @@ namespace HotelReservationSystem
             hotelsList.Sort((hotel1, hotel2) => hotel1.weekdayRates.CompareTo(hotel2.weekdayRates));
             return hotelsList[0];
         }
+        public Hotel FindCheapestHotel(DateTime[] dates)
+        {
+            int totalPrice = 0;
+            int weekendCount = 0;
+            int weekdayCount = 0;
+            int minimumRate = 99999;
+            Hotel cheapestHotel = null;
+            foreach (var date in dates)
+            {
+                if (date.DayOfWeek == DayOfWeek.Saturday || date.DayOfWeek == DayOfWeek.Sunday)
+                {
+                    weekendCount++;
+                }
+                else
+                {
+                    weekdayCount++;
+                }
+            }
+            foreach (var hotel in hotelsList)
+            {
+                totalPrice = hotel.weekdayRates * weekdayCount + hotel.weekendRates * weekendCount;
+                if (totalPrice < minimumRate)
+                {
+                    minimumRate = totalPrice;
+                    cheapestHotel = hotel;
+                }
+            }
+            Console.WriteLine("Total Rate: " + minimumRate);
+            return cheapestHotel;
+        }
         public DateTime[] getDates(string[] dates)
         {
             DateTime[] datesValidated = new DateTime[dates.Length];

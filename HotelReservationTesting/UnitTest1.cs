@@ -1,5 +1,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using HotelReservationSystem;
+using System;
+
 namespace HotelReservationTesting
 {
     [TestClass]
@@ -28,6 +30,31 @@ namespace HotelReservationTesting
             Hotel cheapestHotel = hotelsManager.FindCheapestHotel(dates);
             Assert.AreEqual("Lakewood", cheapestHotel.hotelName);
             Assert.AreEqual(220, cheapestHotel.weekdayRates*dates.Length);
+        }
+        [TestMethod]
+        public void GivenWeekendRatesReturnWeekendRate()
+        {
+            HotelsManager hotelsManager = new HotelsManager();
+            hotelsManager.AddHotel(new Hotel("Lakewood", "Regular", 110, 90));
+            hotelsManager.AddHotel(new Hotel("Bridgewood", "Regular", 150, 50));
+            hotelsManager.AddHotel(new Hotel("Ridgewood", "Regular", 220, 150));
+            Assert.AreEqual(90, hotelsManager.hotelsList[0].weekendRates);
+        }
+        [TestMethod]
+        public void GivenDatesReturnCheapestHotel()
+        {
+            HotelsManager hotelsManager = new HotelsManager();
+            hotelsManager.AddHotel(new Hotel("Lakewood", "Regular", 110, 90));
+            hotelsManager.AddHotel(new Hotel("Bridgewood", "Regular", 150, 50));
+            hotelsManager.AddHotel(new Hotel("Ridgewood", "Regular", 220, 150));
+            string[] dates = "11Sep2020,12Sep2020".Split(",");
+            DateTime[] date = new DateTime[dates.Length];
+            for (int index = 0; index < date.Length; index++)
+            {
+                date[index] = DateTime.Parse(dates[index]);
+            }
+            Hotel cheapestHotel = hotelsManager.FindCheapestHotel(date);
+            Assert.AreEqual("Lakewood", cheapestHotel.hotelName);
         }
     }
 }
