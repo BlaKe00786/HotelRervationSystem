@@ -93,5 +93,21 @@ namespace HotelReservationTesting
             hotelsManager.AddHotel(new Hotel("Ridgewood", "Reward", 220, 150, 5, 0, 0));
             Assert.AreEqual(expectedRate, hotelsManager.hotelsList[0].specialWeekdayRates);
         }
+        [TestMethod]
+        public void GivenDatesReturnBestCheapestHotel()
+        {
+            HotelsManager hotelsManager = new HotelsManager();
+            hotelsManager.AddHotel(new Hotel("Lakewood", "Reward", 110, 90, 3, 80, 80));
+            hotelsManager.AddHotel(new Hotel("Bridgewood", "Reward", 150, 50, 4, 110, 50));
+            hotelsManager.AddHotel(new Hotel("Ridgewood", "Reward", 220, 150, 5, 100, 40));
+            string[] dates = "11Sep2020,12Sep2020".Split(",");
+            DateTime[] date = new DateTime[dates.Length];
+            for (int index = 0; index < date.Length; index++)
+            {
+                date[index] = DateTime.Parse(dates[index]);
+            }
+            Hotel cheapestHotel = hotelsManager.FindCheapestHotel(date);
+            Assert.AreEqual("Ridgewood", cheapestHotel.hotelName);
+        }
     }
 }
