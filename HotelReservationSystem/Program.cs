@@ -18,7 +18,7 @@ namespace HotelReservationSystem
                 date[index] = DateTime.Parse(dates[index]);
             }
             Hotel highestRatedhotel = hotelsManager.GivenWeekendAndWeekdayRateReturnBestRatedHotelForRewardCustomerWithRegexValidation(dates);
-            Console.WriteLine("Cheapest Hotel for given dates with regex validation: " + highestRatedhotel.hotelName);
+            Console.WriteLine("The Cheapest Hotel for given dates with regex validation: " + highestRatedhotel.hotelName);
         }
     }
 }
