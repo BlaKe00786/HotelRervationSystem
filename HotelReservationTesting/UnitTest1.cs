@@ -109,5 +109,6 @@ namespace HotelReservationTesting
             Hotel cheapestHotel = hotelsManager.FindCheapestHotel(date);
             Assert.AreEqual("Ridgewood", cheapestHotel.hotelName);
         }
+
     }
 }
